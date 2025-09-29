@@ -1,22 +1,34 @@
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { ProductsData } from "../utils/dummyData";
-import React from "react";
+import React, { useState } from "react";
+import ProductDetailModal from "./ProductDetailMadal";
 
 const Products = () => {
+  const [openModal, setOpenModal] = useState(false);
+  const [currentProductId, setCurrentProductId] = useState({});
+  const handleOpen = (productDetails) => {
+    console.log(productDetails);
+
+    setOpenModal(true);
+    setCurrentProductId(productDetails.id);
+  };
+
+  const handleClose = () => setOpenModal(false);
   return (
     <>
-      <Box key={Products.id} className="flex-grow">
+      <Box className="flex-grow">
         <Grid container spacing={2}>
           {ProductsData?.map((product) => {
             return (
-              <Grid size={3}>
+              <Grid key={product.id} size={3}>
                 <Card className="w-[345px] p-5">
                   <Box
                     component="img"
                     src={product.img}
                     alt={product.productName}
-                    className="mb-4"
+                    className="mb-4 cursor-pointer"
+                    onClick={() => handleOpen(product)}
                   />
                   <Typography variant="h6">{product.productName}</Typography>
                   <Typography variant="subtitle1">{product.weight}</Typography>
@@ -41,6 +53,14 @@ const Products = () => {
           })}
         </Grid>
       </Box>
+      {open && (
+        <ProductDetailModal
+          openModal={openModal}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+          currentProductId={currentProductId}
+        />
+      )}
     </>
   );
 };

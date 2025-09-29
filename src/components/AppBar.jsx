@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { navButtonStyle as style } from "./style.js";
+import { navButtonStyle } from "./style";
 import {
   AppBar,
   Box,
@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "../assets/Logo-new.webp";
-import { navButtonStyle } from "./style";
+import { Link } from "react-router";
 
 const MyAppBar = () => {
   const navItems = ["Shop", "Offer", "Contact"];
@@ -57,11 +57,20 @@ const MyAppBar = () => {
             </Box>
 
             <Box className="hidden sm:flex gap-6">
-              {navItems.map((item) => (
+              {/* {navItems.map((item) => (
                 <Button key={item} sx={navButtonStyle}>
                   {item}
                 </Button>
-              ))}
+              ))} */}
+              <Button component={Link} to="/shop" sx={navButtonStyle}>
+                Shops
+              </Button>
+              <Button component={Link} to="/offer" sx={navButtonStyle}>
+                Offer
+              </Button>
+              <Button component={Link} to="/contact" sx={navButtonStyle}>
+                Contact
+              </Button>
 
               <Box
                 onMouseEnter={(e) => setAnchorEl(e.currentTarget)}
