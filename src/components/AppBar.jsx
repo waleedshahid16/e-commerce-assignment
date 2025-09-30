@@ -13,7 +13,8 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "../assets/Logo-new.webp";
-import { Link } from "react-router";
+import { navButtonStyle } from "./style";
+
 const MyAppBar = () => {
   const navItems = ["Shop", "Offer", "Contact"];
 
@@ -132,5 +133,3 @@ const MyAppBar = () => {
     </>
   );
 };
-
-export default MyAppBar;
