@@ -14,7 +14,6 @@ import {
 } from "@mui/material";
 import Logo from "../assets/Logo-new.webp";
 import { Link } from "react-router";
-
 const MyAppBar = () => {
   const navItems = ["Shop", "Offer", "Contact"];
 
@@ -79,11 +78,11 @@ const MyAppBar = () => {
                 <Button sx={navButtonStyle}>Pages</Button>
 
                 <Menu
-                sx={{
-                    borderRadius:"5px",
+                  sx={{
+                    borderRadius: "5px",
                     boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
                     mt: "5px",
-                }}
+                  }}
                   anchorEl={anchorEl}
                   open={Boolean(anchorEl)}
                   onClose={() => setAnchorEl(null)}
