@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -5,25 +6,24 @@ import {
   IconButton,
   InputAdornment,
 } from "@mui/material";
-import LogoImage from "../../assets/Logo-new.webp";
-import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "./../../../node_modules/@hookform/resolvers/yup/src/yup";
 import { Eye, EyeOff } from "lucide-react";
+import { useForm, Controller } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
+import LogoImage from "../../assets/Logo-new.webp";
 
-const initialRegistrationFormValues = {
-  name: "",
+
+
+const initialSignInFormValues = {
   email: "",
   password: "",
 };
 
-const registerSchema = yup.object({
-  name: yup.string().required("Name is required"),
+const signInSchema = yup.object({
   email: yup
     .string()
-    .email("Enter a valid email")
+    .email("Please enter a valid email")
     .required("Email is required"),
   password: yup
     .string()
@@ -31,19 +31,21 @@ const registerSchema = yup.object({
     .required("Password is required"),
 });
 
-const Register = () => {
+const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    defaultValues: initialRegistrationFormValues,
-    resolver: yupResolver(registerSchema),
+    defaultValues: initialSignInFormValues,
+    resolver: yupResolver(signInSchema),
   });
 
-  const registerSubmit = (data) => {
+  const signInSubmit = (data) => {
     console.log(data);
+    alert("Sign in successful! Check console for data.");
   };
 
   const handleClickShowPassword = () => {
@@ -73,51 +75,16 @@ const Register = () => {
             </div>
           </div>
           <h1 className="text-white text-2xl font-bold text-center">
-            Create Account
+            Welcome Back
           </h1>
           <p className="text-teal-50 text-center text-sm mt-2">
-            Join us and start shopping today
+            Sign in to continue to your account
           </p>
         </div>
 
         {/* Form Section */}
         <div className="p-8">
-          <form onSubmit={handleSubmit(registerSubmit)} className="space-y-5">
-            {/* Name Field */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-              </label>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    fullWidth
-                    placeholder="Enter your full name"
-                    error={!!errors?.name}
-                    sx={{
-                      "& .MuiOutlinedInput-root": {
-                        borderRadius: 2,
-                        "&:hover fieldset": {
-                          borderColor: "#019376",
-                        },
-                        "&.Mui-focused fieldset": {
-                          borderColor: "#019376",
-                        },
-                      },
-                    }}
-                  />
-                )}
-              />
-              {errors?.name && (
-                <p className="text-red-500 text-xs mt-1">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
+          <form onSubmit={handleSubmit(signInSubmit)} className="space-y-5">
             {/* Email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -167,7 +134,7 @@ const Register = () => {
                     {...field}
                     fullWidth
                     type={showPassword ? "text" : "password"}
-                    placeholder="Minimum 6 characters"
+                    placeholder="Enter your password"
                     error={!!errors?.password}
                     sx={{
                       "& .MuiOutlinedInput-root": {
@@ -213,6 +180,16 @@ const Register = () => {
               )}
             </div>
 
+            {/* Forgot Password Link */}
+            <div className="text-right">
+              <a
+                href="#"
+                className="text-sm font-semibold text-teal-600 hover:text-teal-700 hover:underline transition-colors"
+              >
+                Forgot Password?
+              </a>
+            </div>
+
             {/* Submit Button */}
             <Button
               type="submit"
@@ -235,18 +212,18 @@ const Register = () => {
                 transition: "all 0.2s",
               }}
             >
-              Create Account
+              Sign In
             </Button>
 
-            {/* Sign In Link */}
+            {/* Sign Up Link */}
             <div className="text-center pt-4 border-t border-gray-100">
               <p className="text-sm text-gray-600">
-                Already have an account?{" "}
+                Don't have an account?{" "}
                 <Link
-                  to="/signin"
+                  to="/register"
                   className="font-semibold text-teal-600 hover:text-teal-700 hover:underline transition-colors"
                 >
-                  Sign in
+                  Sign up
                 </Link>
               </p>
             </div>
@@ -257,4 +234,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignIn;

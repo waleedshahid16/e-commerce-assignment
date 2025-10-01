@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "../assets/Logo-new.webp";
-import { navButtonStyle } from "./style";
+import { Link } from "react-router";
 
 const MyAppBar = () => {
   const navItems = ["Shop", "Offer", "Contact"];
@@ -31,7 +31,9 @@ const MyAppBar = () => {
                 component="div"
                 sx={{ display: { xs: "none", sm: "block" } }}
               >
-                <img src={Logo} alt="" />
+                <Link to="/">
+                  <img src={Logo} alt="" />
+                </Link>
               </Typography>
 
               <FormControl size="small" sx={{ minWidth: 120 }}>
@@ -121,6 +123,8 @@ const MyAppBar = () => {
                 Join
               </Button>
               <Button
+                component={Link}
+                to="/register"
                 variant="contained"
                 sx={{ textTransform: "none", bgcolor: "#019376" }}
               >
@@ -133,3 +137,4 @@ const MyAppBar = () => {
     </>
   );
 };
+export default MyAppBar;
