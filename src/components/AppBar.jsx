@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { navButtonStyle } from "./style";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   FormControl,
@@ -14,8 +16,11 @@ import {
 } from "@mui/material";
 import Logo from "../assets/Logo-new.webp";
 import { Link } from "react-router";
+import { useSelector } from "react-redux";
 
 const MyAppBar = () => {
+  const {Products : productsDummyData} = useSelector((state) => state.cart)
+  
   const navItems = ["Shop", "Offer", "Contact"];
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -115,7 +120,11 @@ const MyAppBar = () => {
                   </MenuItem>
                 </Menu>
               </Box>
-
+              <Button>
+                <Badge badgeContent={productsDummyData?.length} color="primary">  
+                  <AddShoppingCartIcon sx={{ color: "#019376" }} />
+                </Badge>
+              </Button>
               <Button
                 variant="contained"
                 sx={{ textTransform: "none", bgcolor: "#019376" }}

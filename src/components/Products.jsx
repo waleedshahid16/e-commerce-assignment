@@ -1,10 +1,14 @@
 import { Box, Button, Card, Grid, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { ProductsData } from "../utils/dummyData";
 import React, { useState } from "react";
 import ProductDetailModal from "./ProductDetailMadal";
+import { useSelector } from "react-redux";
 
 const Products = () => {
+  const {Products : productsDummyData} = useSelector((state) => state.cart)
+  
+
+  
   const [openModal, setOpenModal] = useState(false);
   const [currentProductId, setCurrentProductId] = useState({});
   const handleOpen = (productDetails) => {
@@ -19,7 +23,7 @@ const Products = () => {
     <>
       <Box className="flex-grow">
         <Grid container spacing={2}>
-          {ProductsData?.map((product) => {
+          {productsDummyData?.map((product) => {
             return (
               <Grid key={product.id} size={3}>
                 <Card className="w-[345px] p-5">
