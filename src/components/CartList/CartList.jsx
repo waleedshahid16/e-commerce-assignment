@@ -17,7 +17,7 @@ function CartList(props) {
     <div>
       <Drawer open={openCartList} onClose={toggleDrawer(false)}>
         <Box
-          sx={{ width: 250 }}
+          sx={{ width: 350 }}
           role="presentation"
           onClick={toggleDrawer(false)}
         >Products</Box>
