@@ -12,6 +12,6 @@ export const authSlice = createSlice({
         // addToCart: (state , actions)=> {}
     }
 })
-export const {  } = authSlice.actions
+// export const {  } = authSlice.actions
 
 export default authSlice.reducer
