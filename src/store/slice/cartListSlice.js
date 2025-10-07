@@ -12,7 +12,6 @@ export const cartSlice = createSlice({
     addToCart: (state, actions) => {
       const item = actions.payload;
       const existingItem = state.cartList.find((prod) => prod.id === item.id);
-
       existingItem
         ? (existingItem.quantity += 1)
         : state.cartList.push({ ...item, quantity: 1 });

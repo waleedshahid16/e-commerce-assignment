@@ -7,11 +7,19 @@ import { addToCart } from "../store/slice/cartListSlice";
 
 const Products = () => {
   const { Products: productsDummyData } = useSelector((state) => state.cart);
+  const { searchTerm } = useSelector((state) => state.search);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [currentProductId, setCurrentProductId] = useState({});
+
   
+  const filteredProducts = searchTerm
+    ? productsDummyData.filter((prod) =>
+        prod.productName.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : productsDummyData;
+
   const handleOpen = (productDetails) => {
     console.log(productDetails);
     setOpenModal(true);
@@ -22,11 +30,19 @@ const Products = () => {
 
   return (
     <>
-      <Box className="flex-grow">
+      <Box id="products-section" className="flex-grow">
         <Grid container spacing={2}>
-          {productsDummyData?.map((product) => {
+          {filteredProducts?.map((product, index) => {
             return (
-              <Grid key={product.id} size={3}>
+              <Grid
+                key={product.id}
+                size={3}
+                id={
+                  index === 0 && searchTerm
+                    ? `product-${product.id}`
+                    : undefined
+                }
+              >
                 <Card className="w-[345px] p-5">
                   <Box
                     component="img"

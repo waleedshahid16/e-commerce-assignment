@@ -10,11 +10,11 @@ const CartButton = () => {
     }, 0)
     .toFixed(2);
   return (
-    <Box className="bg-[#019376] px-5 py-3 rounded-l-[8px]">
+    <Box className="bg-[#019376]  p-3 rounded-l-[8px]">
       {cartList?.length ? (
         <Typography
           variant="body2"
-          sx={{ marginBottom: "10px", color: "white" }}
+          sx={{ marginBottom: "8px", color: "white" }}
         >
           {cartList.length} {cartList.length === 1 ? "Item" : "Items"}
         </Typography>
@@ -37,4 +37,3 @@ const CartButton = () => {
 };
 
 export default CartButton;
-
