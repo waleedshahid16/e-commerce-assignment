@@ -9,13 +9,12 @@ const HeroSection = () => {
   const dispatch = useDispatch();
 
   const handleSearchClick = () => {
-    // Scroll to products section after search button click
     setTimeout(() => {
       const productsSection = document.getElementById("products-section");
       if (productsSection) {
         productsSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    }, 100);
+    }, 500);
   };
 
   return (
