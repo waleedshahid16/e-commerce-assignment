@@ -12,8 +12,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "react-router";
 import LogoImage from "../../assets/Logo-new.webp";
-
-
+import { URLS } from "../../API_ENDPOINTS/API_ENDPOINTS.JS";
+import { axiosInstance } from "../../api/axios";
 
 const initialSignInFormValues = {
   email: "",
@@ -23,7 +23,7 @@ const initialSignInFormValues = {
 const signInSchema = yup.object({
   email: yup
     .string()
-    .email("Please enter a valid email")
+    .email("Enter a valid email")
     .required("Email is required"),
   password: yup
     .string()
@@ -43,9 +43,16 @@ const SignIn = () => {
     resolver: yupResolver(signInSchema),
   });
 
-  const signInSubmit = (data) => {
-    console.log(data);
-    alert("Sign in successful! Check console for data.");
+  const signInSubmit = async (data) => {
+    const payload = {
+      email: data.email,
+      password: data.password,
+    };
+    const resp = await axiosInstance.post(URLS.signIn, payload);
+    localStorage.setItem("token", resp.data.access_token)
+    console.log(resp);
+
+    // alert("Sign in successful! Check console for data.");
   };
 
   const handleClickShowPassword = () => {
@@ -85,10 +92,10 @@ const SignIn = () => {
         {/* Form Section */}
         <div className="p-8">
           <form onSubmit={handleSubmit(signInSubmit)} className="space-y-5">
-            {/* Email Field */}
+            {/* email Field */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email Address
+                Enter Email
               </label>
               <Controller
                 name="email"
